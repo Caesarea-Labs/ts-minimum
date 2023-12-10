@@ -1,6 +1,6 @@
 {
   "name": "ts-minimum",
-  "version": "0.1.3",
+  "version": "0.2.1",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "module": "dist/index.js",
@@ -15,6 +15,7 @@
     "pub": "tsup --dts && npm version patch --force && npm publish"
   },
   "dependencies": {
+    "@mantine/core": "^7.3.1",
     "dayjs": "^1.11.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
