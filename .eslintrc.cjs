@@ -3,7 +3,6 @@ module.exports = {
     env: {browser: true, es2020: true},
     parser: "@typescript-eslint/parser",
     parserOptions: {
-        tsconfigRootDir: "../../",
         project: [
             "./tsconfig.json"
         ]

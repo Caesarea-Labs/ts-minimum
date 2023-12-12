@@ -6,7 +6,8 @@ import React from "react";
 import "./styles.global.css"
 
 export function useLightMode(): boolean {
-    return React.useContext(ThemeContext)
+    const ctx = ThemeContext()
+    return React.useContext(ctx)
 }
 
 /**
@@ -14,9 +15,10 @@ export function useLightMode(): boolean {
  * Required for {@link ThemeRoot}.
  */
 export function ThemeProvider(props: { children: ReactComponent, light: boolean }) {
-    return <ThemeContext.Provider value={props.light}>
+    const ctx = ThemeContext()
+    return <ctx.Provider value={props.light}>
         {props.children}
-    </ThemeContext.Provider>
+    </ctx.Provider>
 }
 
 /**
@@ -31,4 +33,5 @@ export function ThemeRoot(props: { children: ReactComponent, style?: CSSProperti
     </MantineProvider>
 }
 
-const ThemeContext = createContext(!systemIsDarkMode())
+// Make it lazy for it to not trigger in non-browser contexts (it accesses window which would be bad for them)
+const ThemeContext = () => createContext(!systemIsDarkMode())
