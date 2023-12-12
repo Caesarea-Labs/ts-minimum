@@ -1,18 +1,15 @@
 {
   "name": "ts-minimum",
   "type": "module",
-  "version": "0.2.9",
+  "version": "0.2.10",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
-  "types": "dist/index.cjs",
+  "types": "dist/index.d.ts",
   "typings": "dist/index.d.ts",
   "exports": {
-    "require": {
+    ".": {
       "import": "./dist/index.cjs",
-      "types": "./dist/index.d.cts"
-    },
-    "import": {
-      "import": "./dist/index.js",
+      "require": "./dist/index.js",
       "types": "./dist/index.d.ts"
     }
   },
