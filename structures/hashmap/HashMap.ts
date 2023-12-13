@@ -35,7 +35,7 @@ export interface MutableDict<K, V> extends Dict<K, V> {
  */
 export class HashMap<K, V> implements MutableDict<K, V> {
     private capacity: number
-    // Not as efficient as it could be - a LinkedList would make inserting more performant
+
     private buckets: MapBucket<K, V>[]
     private _size = 0
     private _bucketsFilled = 0
@@ -43,7 +43,8 @@ export class HashMap<K, V> implements MutableDict<K, V> {
     ////////// Constructors ////////////
     constructor(capacity: number | undefined) {
         // Pad some space for better performance
-        this.capacity = capacity === undefined ? DefaultCapacity : Math.ceil(capacity * InitialCapacityPadding)
+        // Force the size to be at least 1 to allow insertion
+        this.capacity = capacity === undefined ? DefaultCapacity : Math.max(1, Math.ceil(capacity * InitialCapacityPadding))
         this.buckets = new Array<MapBucket<K, V>>(this.capacity)
     }
 

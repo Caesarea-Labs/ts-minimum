@@ -3,6 +3,10 @@ import {HashMap} from "./HashMap"
 export class HashSet<T> {
     private _map: HashMap<T, 1>
 
+    static create<T>(): HashSet<T> {
+        return this.ofCapacity(undefined)
+    }
+
     static ofCapacity<T>(capacity: number | undefined): HashSet<T> {
         return new HashSet(new HashMap<T, 1>(capacity))
     }
