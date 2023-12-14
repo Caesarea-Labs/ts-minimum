@@ -1,7 +1,7 @@
 {
   "name": "ts-minimum",
   "type": "module",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "main": "dist/index.cjs",
   "types": "dist/index.d.ts",
   "exports": {
@@ -15,6 +15,7 @@
   "keywords": [],
   "scripts": {
     "build": "tsup --dts",
+    "buildForLocal": "tsup --dts && npm version patch --force && yalc publish",
     "build:main": "tsc -p tsconfig.json",
     "build:module": "tsc -p tsconfig.module.json",
     "test": "run-s build test:*",
@@ -22,13 +23,12 @@
     "pub": "tsup --dts && npm version patch --force && npm publish",
     "pubNoBump": "tsup --dts && npm publish"
   },
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "@mantine/core": "^7.3.1",
     "dayjs": "^1.11.10",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
-  },
-  "devDependencies": {
+    "react-dom": "^18.2.0",
     "@types/jest": "^29.5.11",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
