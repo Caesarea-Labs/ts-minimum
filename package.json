@@ -1,7 +1,7 @@
 {
   "name": "ts-minimum",
   "type": "module",
-  "version": "0.3.10",
+  "version": "0.3.11",
   "main": "dist/index.cjs",
   "types": "dist/index.d.ts",
   "exports": {
@@ -23,12 +23,13 @@
     "pub": "tsup --dts && npm version patch --force && npm publish",
     "pubNoBump": "tsup --dts && npm publish"
   },
-  "dependencies": {},
-  "devDependencies": {
+  "dependencies": {
     "@mantine/core": "^7.3.1",
     "dayjs": "^1.11.10",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
     "@types/jest": "^29.5.11",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
