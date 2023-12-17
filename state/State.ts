@@ -62,6 +62,13 @@ export class State<T> {
         return this.mapType(obj => obj[field], fieldValue => ({...this.value, [field]: fieldValue}))
     }
 
+    /**
+     * Same as `field` but allows specifying a special ctr() function that creates new objects using the constructor of the object.
+     */
+    classField<F extends keyof T>(field: F, ctr: (props: T) => T): State<T[F]> {
+        return this.mapType(obj => obj[field], fieldValue => ctr(({...this.value, [field]: fieldValue})))
+    }
+
 }
 
 

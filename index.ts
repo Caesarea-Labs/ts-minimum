@@ -31,3 +31,6 @@ export * from "./types/Basic"
 export * from "./types/Gui"
 export * from "./types/React"
 export * from "./types/TypeUtils"
+import "./theme/styles.global.css"
+import "./searchit/impl/searchit.css"
+

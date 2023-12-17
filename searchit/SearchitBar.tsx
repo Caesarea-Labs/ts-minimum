@@ -183,6 +183,7 @@ function Example({example}: { example: SearchExample }) {
 }
 
 function UnsubmittedIndicator(props: { submitted: boolean, loading: boolean }) {
+
     return <div className={"searchit_loader"} style={styleWithVariables(
         {
             visibility: !props.submitted || props.loading ? undefined : "hidden",
@@ -235,6 +236,6 @@ function SearchitBarImpl(props: SearchitProps & { showHelp: State<boolean> }) {
 function ShowHelpButton(props: { state: State<boolean> }) {
     const showingHelp = props.state.value
     return <Button onClick={() => props.state.setValue(old => !old)}
-                   style={{color: showingHelp ? AppTheme.strongText : AppTheme.subtitleText}}
+                   style={{color: showingHelp ? AppTheme.strongText : AppTheme.subtitleText, overflow: "unset"}}
                    variant={showingHelp ? "light" : "subtle"}>{showingHelp ? "Hide Help" : "Show Help"}</Button>
 }
