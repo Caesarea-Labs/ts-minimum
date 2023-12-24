@@ -16,9 +16,14 @@ import {useEffect, useState} from "react"
  * @param throwOnError If false, when fetching fails this will return undefined instead of throwing.
  * @return T | undefined: The result of the promise or undefined if no promise has been resolved yet.
  * @return boolean: Whether a promise is currently in the process of being resolved. Use this to know whether we are "loading".
+ * @return a callback that allows setting the value by the client
  */
-export function usePromise<T>(promise: () => Promise<T> | T, deps: unknown[], throwOnError = true): [T | undefined, boolean] {
+export function usePromise<T>(promise: () => Promise<T> | T, deps: unknown[], throwOnError = true): [T | undefined, boolean, (value: T) => void] {
     const [result, setResult] = useState<PromiseState<T>>({kind: "loading", oldValue: undefined})
+
+    const clientSetResult: (value: T) => void = (value) => {
+        setResult({kind: "success", value})
+    }
 
     useEffect(() => {
         setResult({kind: "loading", oldValue: getPromiseStateValue(result)})
@@ -31,14 +36,14 @@ export function usePromise<T>(promise: () => Promise<T> | T, deps: unknown[], th
     }, deps)
     switch (result.kind) {
         case "loading":
-            return [result.oldValue, true]
+            return [result.oldValue, true, clientSetResult]
         case "success":
-            return [result.value, false]
+            return [result.value, false, clientSetResult]
         case "error": {
             if (throwOnError) {
                 throw result.error
             } else {
-                return [undefined, false]
+                return [undefined, false, clientSetResult]
             }
         }
     }
