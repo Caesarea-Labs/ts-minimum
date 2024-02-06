@@ -78,6 +78,8 @@ declare global {
 
         last(): T
 
+        lastOrNull(): T | null
+
         firstIndex(predicate: (item: T) => boolean): number
 
         indexOfOrThrow(item: T): number

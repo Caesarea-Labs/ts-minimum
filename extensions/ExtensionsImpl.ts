@@ -295,6 +295,9 @@ Array.prototype.getOrThrow = function <T>(this: T[], index: number): T {
 Array.prototype.last = function <T>(this: T[]): T {
     return this[this.length - 1]
 }
+Array.prototype.lastOrNull = function <T>(this: T[]): T | null {
+    return this.length === 0 ? null : this[this.length - 1]
+}
 
 
 Array.prototype.first = function <T>(this: T[]): T {
