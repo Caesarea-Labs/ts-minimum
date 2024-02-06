@@ -1,5 +1,5 @@
-import {State, useStateObject} from "./State";
-import {defaultJsonSerializer, StringSerializer} from "../structures/json";
+import {State, useStateObject} from "./State"
+import {defaultJsonSerializer, StringSerializer} from "../structures/json"
 
 
 export class PersistentValue<T> {
@@ -7,14 +7,20 @@ export class PersistentValue<T> {
     private readonly serializer: StringSerializer<T>
 
     constructor(key: string, parser?: StringSerializer<T>) {
-        this.key = key;
+        this.key = key
         this.serializer = parser ?? defaultJsonSerializer()
     }
 
     getValue(): T | null {
-        const result = localStorage.getItem(this.key);
+        const result = localStorage.getItem(this.key)
         if (result === null) return null
-        return this.serializer.parse(result)
+        try {
+            return this.serializer.parse(result)
+        } catch (e) {
+            console.error(`Failed to deserialize stored data, it will be flushed: ${result} error: ${e}`)
+            this.setValue(null!)
+            return null
+        }
     }
 
     setValue(value: T) {
