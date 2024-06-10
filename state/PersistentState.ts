@@ -1,7 +1,7 @@
 import {State, useStateObject} from "./State"
 import {defaultJsonSerializer, StringSerializer} from "../structures/json"
 
-
+// TODO: I feel like you be able to pass a default value and then it won't return a nullable in getValue()
 export class PersistentValue<T> {
     private readonly key: string
     private readonly serializer: StringSerializer<T>
