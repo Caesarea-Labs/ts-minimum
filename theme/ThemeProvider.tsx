@@ -11,7 +11,7 @@ export function useLightMode(): boolean {
 
 /**
  * Allows calling {@link useLightMode} in children components.
- * Required for {@link ThemeRoot}.
+ * Required for {@link ThemeRoot} (make sure to have both always)
  */
 export function ThemeProvider(props: { children: ReactComponent, light: boolean }) {
     const ctx = getThemeContext()
