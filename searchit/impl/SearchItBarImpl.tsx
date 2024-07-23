@@ -77,8 +77,7 @@ function NonEmptyAutocompleteContent(props: AutoCompleteContentProps) {
     // Complete with selected item when enter is pressed
     useKeyboardShortcut({
         code: "Enter", callback: () => {
-            const index = indexOf(activeItem)
-            props.onSelectItem(items.getOrThrow(index))
+            props.onSelectItem(activeItem)
         }
     }, [items, activeItem])
 

@@ -10,10 +10,6 @@ export interface Point {
 }
 
 export interface AutoComplete {
-    // /**
-    //  * X position of the autocomplete popup relative to the search bar
-    //  */
-    // relativeXPosition: number
 
     /**
      * Absolute position of the autocomplete contents
@@ -24,8 +20,6 @@ export interface AutoComplete {
      * Current content that is being autocompleted
      */
     query: State<string>
-
-    // setQuery(query: string): void
 
     /**
      * Current word that is being typed, for example when writing "The great hor", the current typed word would be "hor" at the end.

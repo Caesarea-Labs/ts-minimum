@@ -40,6 +40,9 @@ export interface AutoCompleteConfig {
      * For example, if you want to allow to complete the text "hello",
      * add a completable that returns a "hello" completion when parts of "hello" are present in the text.
      * You could also add another completable that completes the text "world", but only when the word starts with "hello", etc.
+     * @see syncCompletable
+     * @see substringCompletable
+     * @see keyValuesCompletable
      */
     completables: Completable[]
 

@@ -1,12 +1,17 @@
 import {State, useStateObject} from "./State"
 import {defaultJsonSerializer, StringSerializer} from "../structures/json"
 
-
+/**
+ * Stores a value in local storage, easily accessible with simple getValue() and setValue() methods.
+ *
+ * This supports any kind of object, by serializing it with a {@link StringSerializer}.
+ *
+ * A {@link key} must be passed to identify the data uniquely in local storage.
+ */
 export class PersistentValue<T> {
-    private readonly key: string
     private readonly serializer: StringSerializer<T>
 
-    constructor(key: string, parser?: StringSerializer<T>) {
+    constructor(private readonly key: string, parser?: StringSerializer<T>) {
         this.key = key
         this.serializer = parser ?? defaultJsonSerializer()
     }
@@ -18,7 +23,7 @@ export class PersistentValue<T> {
             return this.serializer.parse(result)
         } catch (e) {
             console.error(`Failed to deserialize stored data, it will be flushed: ${result} error: ${e}`)
-            this.setValue(null!)
+            localStorage.removeItem(this.key)
             return null
         }
     }

@@ -1,4 +1,4 @@
-import {keyValuesCompletable} from "./SyncCompletable"
+import {keyValuesCompletable} from "./Completables";
 
 const AllDateOptions = [
     "today",

@@ -15,26 +15,32 @@ export interface StateRecord<K extends TsKey, V> {
     values(): V[]
 }
 
+/**
+ * Creates a {@link StateRecord} as a state effect, initialized with {@link initialRecord}.
+ * Calling mutations to this StateRecord will trigger a 'recomposition'.
+ */
 export function useStateRecord<K extends TsKey, V>(initialRecord?: Record<K, V>): StateRecord<K, V> {
-    const [record, setRecord] = useState<Record<K, V>>(initialRecord ?? {} as Record<K, V>)
+    // We store the record inside another object and copy it whenever mutation happens, to trick react into thinking it's a new object now.
+    const [record, setRecord] = useState<{ value: Record<K, V> }>({value: initialRecord ?? {} as Record<K, V>
+    })
     return {
         delete(key: K) {
             setRecord(old => {
-                delete old[key]
-                return old
+                delete old.value[key]
+                return {value: old.value}
             })
         },
         values(): V[] {
-            return Object.values(record)
+            return Object.values(record.value)
         },
         set(key: K, value: V) {
             setRecord(old => {
-                old[key] = value
-                return old
+                old.value[key] = value
+                return {value: old.value}
             })
         },
         replaceBy(record: Record<K, V>) {
-            setRecord(record)
+            setRecord({value: record})
         }
     }
 }
